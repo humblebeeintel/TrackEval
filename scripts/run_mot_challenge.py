@@ -97,4 +97,5 @@ if __name__ == '__main__':
             metrics_list.append(metric(metrics_config))
     if len(metrics_list) == 0:
         raise Exception('No metrics selected for evaluation')
+    # some comment for test
     evaluator.evaluate(dataset_list, metrics_list)

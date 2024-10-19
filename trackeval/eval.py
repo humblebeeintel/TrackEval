@@ -243,6 +243,7 @@ def eval_sequence(seq, dataset, tracker, class_list, metrics_list, metric_names)
     seq_res = {}
     for cls in class_list:
         seq_res[cls] = {}
+        actual_tracks_id = raw_data['tracker_ids']
         data = dataset.get_preprocessed_seq_data(raw_data, cls)
         for metric, met_name in zip(metrics_list, metric_names):
             seq_res[cls][met_name] = metric.eval_sequence(data)

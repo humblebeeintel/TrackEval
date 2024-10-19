@@ -375,13 +375,19 @@ class MotChallenge2DBox(_BaseDataset):
         cls_id = self.class_name_to_class_id[cls]
 
         data_keys = ['gt_ids', 'tracker_ids', 'gt_dets',
-                     'tracker_dets', 'tracker_confidences', 'similarity_scores']
+                     'tracker_dets', 'tracker_confidences', 'similarity_scores', 'tracker_ids_original']
+
         data = {key: [None] * raw_data['num_timesteps'] for key in data_keys}
         unique_gt_ids = []
         unique_tracker_ids = []
         num_gt_dets = 0
         num_tracker_dets = 0
+
+        # actual_tracker_ids = defaultdict(list)
+
         for t in range(raw_data['num_timesteps']):
+            if t == 400:
+                pass
 
             # Get all data
             gt_ids = raw_data['gt_ids'][t]
@@ -418,7 +424,7 @@ class MotChallenge2DBox(_BaseDataset):
                                               'The following invalid classes were found in timestep ' + str(t) + ': ' +
                                               ' '.join([str(x) for x in invalid_classes])))
 
-                matching_scores = similarity_scores.copy()
+                matching_scores = similarity_scores.copy()  # (52,20)
                 matching_scores[matching_scores <
                                 0.5 - np.finfo('float').eps] = 0
                 match_rows, match_cols = linear_sum_assignment(
@@ -427,6 +433,9 @@ class MotChallenge2DBox(_BaseDataset):
                                                         match_cols] > 0 + np.finfo('float').eps
                 match_rows = match_rows[actually_matched_mask]
                 match_cols = match_cols[actually_matched_mask]
+
+                # here we get actual matches with tracks
+                # actual_tracker_ids[t] = tracker_ids[match_cols]
 
                 is_distractor_class = np.isin(
                     gt_classes[match_rows], distractor_classes)
@@ -460,6 +469,7 @@ class MotChallenge2DBox(_BaseDataset):
             num_gt_dets += len(data['gt_ids'][t])
 
         # Re-label IDs such that there are no empty IDs
+        # here it is changing gt tracks
         if len(unique_gt_ids) > 0:
             unique_gt_ids = np.unique(unique_gt_ids)
             gt_id_map = np.nan * np.ones((np.max(unique_gt_ids) + 1))
@@ -468,13 +478,16 @@ class MotChallenge2DBox(_BaseDataset):
                 if len(data['gt_ids'][t]) > 0:
                     data['gt_ids'][t] = gt_id_map[data['gt_ids']
                                                   [t]].astype(int)
+
+        # here it is changing tracks
         if len(unique_tracker_ids) > 0:
             unique_tracker_ids = np.unique(unique_tracker_ids)
             tracker_id_map = np.nan * np.ones((np.max(unique_tracker_ids) + 1))
             tracker_id_map[unique_tracker_ids] = np.arange(
-                len(unique_tracker_ids))
+                len(unique_tracker_ids))  # mapping the ids to a new range
             for t in range(raw_data['num_timesteps']):
                 if len(data['tracker_ids'][t]) > 0:
+                    data['tracker_ids_original'][t] = data['tracker_ids'][t]
                     data['tracker_ids'][t] = tracker_id_map[data['tracker_ids'][t]].astype(
                         int)
 

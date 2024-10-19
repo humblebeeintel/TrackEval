@@ -1122,3 +1122,273 @@ FileNotFoundError: [Errno 2] No such file or directory: 'output/MotChallenge2DBo
 
 
 
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 248, in eval_sequence
+    seq_res[cls][met_name] = metric.eval_sequence(data)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/metrics/hota.py", line 116, in eval_sequence
+    _matched_track_ids = gt_ids_t[alpha_match_cols]
+IndexError: index 32 is out of bounds for axis 0 with size 32
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 248, in eval_sequence
+    seq_res[cls][met_name] = metric.eval_sequence(data)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/metrics/hota.py", line 120, in eval_sequence
+    _matched_track_ids_with_rows = tracker_ids_t[alpha_match_rows]
+IndexError: index 21 is out of bounds for axis 0 with size 19
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 248, in eval_sequence
+    trackids = data['trackid'].unique()
+KeyError: 'trackid'
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 248, in eval_sequence
+    trackids = data['tracker_ids'].unique()
+AttributeError: 'list' object has no attribute 'unique'
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 249, in eval_sequence
+    trackids = np.array(data['tracker_ids']).unique()
+NameError: name 'np' is not defined
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 249, in eval_sequence
+    trackids = np.array(data['tracker_ids']).unique()
+ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (429,) + inhomogeneous part.
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 250, in eval_sequence
+    trackids = pd.DataFrame(data['tracker_ids'].unique())
+AttributeError: 'list' object has no attribute 'unique'
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 250, in eval_sequence
+    trackids = pd.DataFrame(data['tracker_ids']).unique()
+  File "/media/hbai/data/code/LITE/myenv/lib/python3.10/site-packages/pandas/core/generic.py", line 6299, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'unique'
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 246, in eval_sequence
+    actual_tracks_id = raw_data['tracks_id']
+KeyError: 'tracks_id'
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 249, in eval_sequence
+    seq_res[cls][met_name] = metric.eval_sequence(data, actual_tracks_id)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+TypeError: CLEAR.eval_sequence() takes 2 positional arguments but 3 were given
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 249, in eval_sequence
+    seq_res[cls][met_name] = metric.eval_sequence(data, actual_tracks_id)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+TypeError: CLEAR.eval_sequence() takes 2 positional arguments but 3 were given
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 249, in eval_sequence
+    seq_res[cls][met_name] = metric.eval_sequence(data, actual_tracks_id)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+TypeError: CLEAR.eval_sequence() takes 2 positional arguments but 3 were given
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 250, in eval_sequence
+    seq_res[cls][met_name] = metric.eval_sequence(data)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+TypeError: HOTA.eval_sequence() missing 1 required positional argument: 'actual_track_ids'
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 247, in eval_sequence
+    data = dataset.get_preprocessed_seq_data(raw_data, cls)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/datasets/mot_challenge_2d_box.py", line 385, in get_preprocessed_seq_data
+    actual_tracker_ids = defaultdict(list)
+NameError: name 'defaultdict' is not defined
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 247, in eval_sequence
+    data = dataset.get_preprocessed_seq_data(raw_data, cls)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/datasets/mot_challenge_2d_box.py", line 434, in get_preprocessed_seq_data
+    actual_tracker_ids[t] = tracker_ids[match_cols]
+NameError: name 'actual_tracker_ids' is not defined
+
+
+
+
+
+MotChallenge2DBox
+LITEDeepSORT__input_1280__conf_.25
+Traceback (most recent call last):
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 117, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/eval.py", line 249, in eval_sequence
+    seq_res[cls][met_name] = metric.eval_sequence(data)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/media/hbai/data/code/LITE/TrackEval/trackeval/metrics/hota.py", line 86, in eval_sequence
+    for t, (gt_ids_t, tracker_ids_t, track_confs, ac_ids) in enumerate(zip(data['gt_ids'], data['tracker_ids'], data['tracker_confidences'], data['tracker_ids_original'])):
+KeyError: 'actual_tracks_id'
+
+
+
+
+

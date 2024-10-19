@@ -83,7 +83,7 @@ class HOTA(_BaseMetric):
 
         # Calculate scores for each timestep
 
-        for t, (gt_ids_t, tracker_ids_t, track_confs) in enumerate(zip(data['gt_ids'], data['tracker_ids'], data['tracker_confidences'])):
+        for t, (gt_ids_t, tracker_ids_t, track_confs, ac_ids) in enumerate(zip(data['gt_ids'], data['tracker_ids'], data['tracker_confidences'], data['tracker_ids_original'])):
             # Deal with the case that there are no gt_det/tracker_det in a timestep.
             if len(gt_ids_t) == 0:
                 for a, alpha in enumerate(self.array_labels):
@@ -95,14 +95,15 @@ class HOTA(_BaseMetric):
                 continue
 
             # Get matching scores between pairs of dets for optimizing HOTA
-            similarity = data['similarity_scores'][t]  # (49,21)
-            #
+            # (49,21) (n_GT, n_Tracker)
+            similarity = data['similarity_scores'][t]
             score_mat = global_alignment_score[gt_ids_t[:, np.newaxis],
-                                               tracker_ids_t[np.newaxis, :]] * similarity
+                                               tracker_ids_t[np.newaxis, :]] * similarity  # (49,21)
 
             # Hungarian algorithm to find best matches
             match_rows, match_cols = linear_sum_assignment(-score_mat)
-
+            # match_rows [0, 1, 4, 5, 10, 11, 12, 13, 14, 15, 16, 18, 19, 22, 23, 24, 25, 26, 27, 30, 36]
+            # match_cols [19, 4, 20, 10, 15, 17, 1, 12, 7, 16, 0, 6, 5, 2, 13, 3, 8, 18, 9, 11, 14]
             # Calculate and accumulate basic statistics
             for a, alpha in enumerate(self.array_labels):
                 subset_sim = similarity[match_rows, match_cols]  # (21,)
@@ -110,16 +111,18 @@ class HOTA(_BaseMetric):
                                                    match_cols] >= alpha - np.finfo('float').eps
                 alpha_match_rows = match_rows[actually_matched_mask]
                 alpha_match_cols = match_cols[actually_matched_mask]
-                if alpha > 0.5 and t == 400:
-                    pass
+
                 # lets get the matching tracks
-                _matched_track_ids = gt_ids_t[alpha_match_cols]
+                _matched_track_ids = tracker_ids_t[alpha_match_cols]
+                _actual_track_ids = ac_ids[alpha_match_cols]
                 _conf_matched_tracks = track_confs[alpha_match_cols]
+
+                assert len(_actual_track_ids) == len(_conf_matched_tracks)
 
                 # save it to a variable
                 # frame_trackid_confs = defaultdict(list) # frame_trackid_confs[alpha] = [(frame, track_id, conf)]
-                frame_trackid_confs[alpha].extend([(t, track_id, conf) for track_id, conf in zip(
-                    _matched_track_ids, _conf_matched_tracks)])
+                frame_trackid_confs[alpha].extend([(t, track_id, actual, conf) for track_id, actual, conf in zip(
+                    _matched_track_ids, _actual_track_ids, _conf_matched_tracks)])
 
                 num_matches = len(alpha_match_rows)
                 res['HOTA_TP'][a] += num_matches
