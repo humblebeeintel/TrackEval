@@ -121,8 +121,8 @@ class HOTA(_BaseMetric):
 
                 # save it to a variable
                 # frame_trackid_confs = defaultdict(list) # frame_trackid_confs[alpha] = [(frame, track_id, conf)]
-                frame_trackid_confs[alpha].extend([(t, track_id, actual, conf) for track_id, actual, conf in zip(
-                    _matched_track_ids, _actual_track_ids, _conf_matched_tracks)])
+                # frame_trackid_confs[alpha].extend([(t, track_id, actual, conf) for track_id, actual, conf in zip(
+                #     _matched_track_ids, _actual_track_ids, _conf_matched_tracks)])
 
                 num_matches = len(alpha_match_rows)
                 res['HOTA_TP'][a] += num_matches

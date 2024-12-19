@@ -117,12 +117,12 @@ class Evaluator:
                                 res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
                                                               metric_names)
                     # save confidences of tracks for each sequences here
-                    import pickle
-                    for seqname, res_seq in res.items():
-                        conf_info = res_seq['pedestrian']['HOTA']['frame_trackid_confs']
+                    # import pickle
+                    # for seqname, res_seq in res.items():
+                    #     conf_info = res_seq['pedestrian']['HOTA']['frame_trackid_confs']
 
-                        with open(f"{dataset.get_output_fol(tracker)}/{seqname}.pkl", "wb") as f:
-                            pickle.dump(conf_info, f)
+                    #     with open(f"{dataset.get_output_fol(tracker)}/{seqname}.pkl", "wb") as f:
+                    #         pickle.dump(conf_info, f)
 
                     # Combine results over all sequences and then over all classes
 
