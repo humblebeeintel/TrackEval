@@ -92,7 +92,7 @@ class _BaseDataset(ABC):
         raw_gt_data = self._load_raw_file(tracker, seq, is_gt=True)
         raw_tracker_data = self._load_raw_file(tracker, seq, is_gt=False)
         raw_data = {**raw_tracker_data, **raw_gt_data}  # Merges dictionaries
-
+    
         # Calculate similarities for each timestep.
         similarity_scores = []
         for t, (gt_dets_t, tracker_dets_t) in enumerate(zip(raw_data['gt_dets'], raw_data['tracker_dets'])):

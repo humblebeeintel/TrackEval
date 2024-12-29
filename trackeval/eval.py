@@ -40,7 +40,8 @@ class Evaluator:
             # If False, summary files are not output for classes with no detections
             'OUTPUT_EMPTY_CLASSES': True,
             'OUTPUT_DETAILED': True,
-            'PLOT_CURVES': True,
+            'PLOT_CURVES': True,    
+            'EVAL_HALF_TRAIN': False,
         }
         return default_config
 
@@ -116,7 +117,7 @@ class Evaluator:
                             for curr_seq in sorted(seq_list):
                                 res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
                                                               metric_names)
-                    # save confidences of tracks for each sequences here
+                    # # save confidences of tracks for each sequences here
                     # import pickle
                     # for seqname, res_seq in res.items():
                     #     conf_info = res_seq['pedestrian']['HOTA']['frame_trackid_confs']

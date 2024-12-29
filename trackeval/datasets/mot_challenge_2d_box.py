@@ -49,6 +49,7 @@ class MotChallenge2DBox(_BaseDataset):
             'GT_LOC_FORMAT': '{gt_folder}/{seq}/gt/gt.txt',
             # If False, data is in GT_FOLDER/BENCHMARK-SPLIT_TO_EVAL/ and in
             'SKIP_SPLIT_FOL': False,
+            'EVAL_HALF_TRAIN' : False,
             # TRACKERS_FOLDER/BENCHMARK-SPLIT_TO_EVAL/tracker/
             # If True, then the middle 'benchmark-split' folder is skipped for both.
         }
@@ -75,6 +76,7 @@ class MotChallenge2DBox(_BaseDataset):
         self.use_super_categories = False
         self.data_is_zipped = self.config['INPUT_AS_ZIP']
         self.do_preproc = self.config['DO_PREPROC']
+        self.eval_half_train = self.config['EVAL_HALF_TRAIN']
 
         self.output_fol = self.config['OUTPUT_FOLDER']
         if self.output_fol is None:
@@ -235,22 +237,34 @@ class MotChallenge2DBox(_BaseDataset):
                                     self.tracker_sub_fol, seq + '.txt')
 
         # Load raw data from text file
-        read_data, ignore_data = self._load_simple_text_file(
+        read_data, _ = self._load_simple_text_file(
             file, is_zipped=self.data_is_zipped, zip_file=zip_file)
-
         # Convert data to required format
         num_timesteps = self.seq_lengths[seq]
+        
+        if self.config.get('EVAL_HALF_TRAIN'):
+            pivot_timestamp = num_timesteps // 2
+            selected_keys = [key for key in read_data if int(key) >= pivot_timestamp]
+            selected_keys.sort(key=int)  # Sort the keys numerically
+            read_data = {key: read_data[key] for key in selected_keys} 
+        else:
+            pivot_timestamp = 0
+        
         data_keys = ['ids', 'classes', 'dets']
         if is_gt:
             data_keys += ['gt_crowd_ignore_regions', 'gt_extras']
         else:
             data_keys += ['tracker_confidences']
-        raw_data = {key: [None] * num_timesteps for key in data_keys}
+
+        raw_data = {key: [None] * (num_timesteps - pivot_timestamp)
+                    for key in data_keys}
 
         # Check for any extra time keys
-        current_time_keys = [str(t + 1) for t in range(num_timesteps)]
+        current_time_keys = [str(t + 1)
+                             for t in range(pivot_timestamp, num_timesteps)]
         extra_time_keys = [
-            x for x in read_data.keys() if x not in current_time_keys]
+             x for x in read_data.keys() if x not in current_time_keys]
+        extra_time_keys = []  # cuz we are workikng with half for ablation
         if len(extra_time_keys) > 0:
             if is_gt:
                 text = 'Ground-truth'
@@ -260,8 +274,8 @@ class MotChallenge2DBox(_BaseDataset):
                 text + ' data contains the following invalid timesteps in seq %s: ' % seq + ', '.join(
                     [str(x) + ', ' for x in extra_time_keys]))
 
-        for t in range(num_timesteps):
-            time_key = str(t+1)
+        for t in range((num_timesteps-pivot_timestamp)):
+            time_key = str(t + pivot_timestamp + 1)
             if time_key in read_data.keys():
                 try:
                     time_data = np.asarray(read_data[time_key], dtype=float)
@@ -326,8 +340,9 @@ class MotChallenge2DBox(_BaseDataset):
                        'dets': 'tracker_dets'}
         for k, v in key_map.items():
             raw_data[v] = raw_data.pop(k)
-        raw_data['num_timesteps'] = num_timesteps
+        raw_data['num_timesteps'] = (num_timesteps-pivot_timestamp)
         raw_data['seq'] = seq
+        
         return raw_data
 
     @_timing.time
