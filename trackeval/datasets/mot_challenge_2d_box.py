@@ -243,6 +243,7 @@ class MotChallenge2DBox(_BaseDataset):
         num_timesteps = self.seq_lengths[seq]
         
         if self.config.get('EVAL_HALF_TRAIN'):
+            print(f'Evaluating half of the sequence {seq}')
             pivot_timestamp = num_timesteps // 2
             selected_keys = [key for key in read_data if int(key) >= pivot_timestamp]
             selected_keys.sort(key=int)  # Sort the keys numerically
