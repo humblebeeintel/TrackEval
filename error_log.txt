@@ -1392,3 +1392,45 @@ KeyError: 'actual_tracks_id'
 
 
 
+MotChallenge2DBox
+alg5
+Traceback (most recent call last):
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/eval.py", line 118, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/eval.py", line 248, in eval_sequence
+    data = dataset.get_preprocessed_seq_data(raw_data, cls)
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/datasets/mot_challenge_2d_box.py", line 383, in get_preprocessed_seq_data
+    self._check_unique_ids(raw_data)
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/datasets/_base_dataset.py", line 315, in _check_unique_ids
+    raise TrackEvalException(exc_str)
+trackeval.utils.TrackEvalException: Tracker predicts the same ID more than once in a single timestep (seq: video11, frame: 3161, ids: 25)
+
+
+
+
+
+MotChallenge2DBox
+alg5
+Traceback (most recent call last):
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/eval.py", line 118, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/eval.py", line 248, in eval_sequence
+    data = dataset.get_preprocessed_seq_data(raw_data, cls)
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/_timing.py", line 17, in wrap
+    result = f(*args, **kw)
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/datasets/mot_challenge_2d_box.py", line 383, in get_preprocessed_seq_data
+    self._check_unique_ids(raw_data)
+  File "/home/hbvision/mirsaid/smart-office/TrackEval/trackeval/datasets/_base_dataset.py", line 315, in _check_unique_ids
+    raise TrackEvalException(exc_str)
+trackeval.utils.TrackEvalException: Tracker predicts the same ID more than once in a single timestep (seq: video11, frame: 3162, ids: 25)
+
+
+
+
+
